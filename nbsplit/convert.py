@@ -1,12 +1,8 @@
 #!/usr/bin/env python3
 
-import json
-import copy
 import os
-import sys
-import argparse
 import textwrap
-import logging
+import argparse
 import subprocess
 
 
