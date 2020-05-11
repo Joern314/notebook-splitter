@@ -30,12 +30,12 @@ def main():
     subprocess.call(
           ["nbsplitter", args.infile.name, "--output", args.output_task.name]
         + ["--keep", "task", "--remove", "solution"]
-        + [i for line in lines for i in ["--line", line]])
+        + [i for line in lines for i in ["--line", line]], shell=True)
 
     subprocess.call(
           ["nbsplitter", args.infile.name, "--output", args.output_solution.name]
         + ["--keep", "solution", "--remove", "task"]
-        + [i for line in lines for i in ["--line", line]])
+        + [i for line in lines for i in ["--line", line]], shell=True)
 
 if __name__ == '__main__':
     main()
