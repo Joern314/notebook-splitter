@@ -13,8 +13,8 @@ def main():
         Also removes the line/cell magics '%%skip' and '%load_ext skip_kernel_extension'. 
         """), formatter_class=argparse.RawTextHelpFormatter)
     parser.add_argument('infile', type=argparse.FileType('r'), help="Input file to convert.")
-    parser.add_argument('--output-task', nargs='?', type=argparse.FileType('w'), default=None, help="Output file for task version.")
-    parser.add_argument('--output-solution', nargs='?', type=argparse.FileType('w'), default=None, help="Output file for solution version.")
+    parser.add_argument('--output-task', nargs='?', type=argparse.FileType('w'), default=None, help="Output file for task version. (default: ..._task.ipynb)")
+    parser.add_argument('--output-solution', nargs='?', type=argparse.FileType('w'), default=None, help="Output file for solution version. (default: ..._solution.ipynb")
     parser.add_argument('--basekey', type=str, help="Basekey to use for discriminating the tags (default: exercise)", default="exercise")
     parser.add_argument('--nbsplit', type=str, nargs='?', default='nbsplitter', help="command to run nbspliiter (default: nbsplitter)")
     args = parser.parse_args()
