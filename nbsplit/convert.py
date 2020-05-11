@@ -8,7 +8,9 @@ import shlex
 
 def main():
     parser = argparse.ArgumentParser(description=textwrap.dedent("""
-		Convert a notebook containing both solutions and tasks into two more notebooks. Solution and task cells need to be marked with the metadata {"exercise": "solution"} and {"exercise": "task"}.
+		Convert a notebook containing both solutions and tasks into two more notebooks. 
+        Solution and task cells need to be marked with the metadata {"exercise": "solution"} and {"exercise": "task"}.
+        Also removes the line/cell magics '%%skip' and '%load_ext skip_kernel_extension'. 
         """), formatter_class=argparse.RawTextHelpFormatter)
     parser.add_argument('infile', type=argparse.FileType('r'), help="Input file to convert.")
     parser.add_argument('--output-task', nargs='?', type=argparse.FileType('w'), default=None, help="Output file for task version.")
