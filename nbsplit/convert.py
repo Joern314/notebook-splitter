@@ -4,7 +4,7 @@ import os
 import textwrap
 import argparse
 import subprocess
-
+import shlex
 
 def main():
     parser = argparse.ArgumentParser(description=textwrap.dedent("""
@@ -14,6 +14,7 @@ def main():
     parser.add_argument('--output-task', nargs='?', type=argparse.FileType('w'), default=None, help="Output file for task version.")
     parser.add_argument('--output-solution', nargs='?', type=argparse.FileType('w'), default=None, help="Output file for solution version.")
     parser.add_argument('--basekey', type=str, help="Basekey to use for discriminating the tags (default: exercise)", default="exercise")
+    parser.add_argument('--nbsplit', type=str, nargs='?', default='nbsplitter', help="command to run nbspliiter (default: nbsplitter)")
     args = parser.parse_args()
     
     inpath, inext = os.path.splitext(args.infile.name)
@@ -27,15 +28,17 @@ def main():
     
     lines = [r"%%skip", r"%load_ext skip_kernel_extension"]
 	
-    subprocess.call(
-          ["nbsplitter", args.infile.name, "--output", args.output_task.name]
-        + ["--keep", "task", "--remove", "solution"]
-        + [i for line in lines for i in ["--line", line]], shell=True)
+    nbsplitter = shlex.split(args.nbsplit)
 
-    subprocess.call(
-          ["nbsplitter", args.infile.name, "--output", args.output_solution.name]
+    subprocess.call( nbsplitter +
+          [args.infile.name, "--output", args.output_task.name]
+        + ["--keep", "task", "--remove", "solution"]
+        + [i for line in lines for i in ["--line", line]])
+
+    subprocess.call( nbsplitter +
+          [args.infile.name, "--output", args.output_solution.name]
         + ["--keep", "solution", "--remove", "task"]
-        + [i for line in lines for i in ["--line", line]], shell=True)
+        + [i for line in lines for i in ["--line", line]])
 
 if __name__ == '__main__':
     main()
