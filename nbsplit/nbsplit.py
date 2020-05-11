@@ -11,7 +11,7 @@ import logging
 logger = logging.getLogger(__file__)
 
 def remove_linestarts(content, linestarts):
-    lines = [line for line in content.splitlines() if not any(line.startswith(m) for m in linestarts)]
+    lines = [line for line in content.split("\n") if not any(line.startswith(m) for m in linestarts)]
     return "\n".join(lines)
 
 def parse(inputfile, keep, remove, basekey, linestarts):
