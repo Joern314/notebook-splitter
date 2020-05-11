@@ -16,7 +16,7 @@ def main():
     parser.add_argument('--output-task', nargs='?', type=argparse.FileType('w'), default=None, help="Output file for task version. (default: ..._task.ipynb)")
     parser.add_argument('--output-solution', nargs='?', type=argparse.FileType('w'), default=None, help="Output file for solution version. (default: ..._solution.ipynb)")
     parser.add_argument('--basekey', type=str, help="Basekey to use for discriminating the tags (default: exercise)", default="exercise")
-    parser.add_argument('--nbsplit', type=str, nargs='?', default='nbsplitter', help="command to run nbspliiter (default: nbsplitter)")
+    parser.add_argument('--nbsplit', type=str, nargs='?', default='nbsplitter', help="command to run nbsplitter (default: nbsplitter)")
     args = parser.parse_args()
     
     inpath, inext = os.path.splitext(args.infile.name)
